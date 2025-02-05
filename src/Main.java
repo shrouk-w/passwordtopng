@@ -35,17 +35,12 @@ public class Main {
                     for(int x=image.getWidth()/2;x< image.getWidth()&&index<bitlist.size();x++){
                         int argb = image.getRGB(x, y);
 
-                        int alpha = bitlist.get(index++);
-                        int red = (argb >> 16) & 0x11111111;
-                        int green = (argb >> 8) & 0x11111111;
-                        int blue = argb & 0x11111111;
+                        int bit = bitlist.get(index++);
 
-                        int newArgb = (alpha<<24) | (red << 16) | (green << 8) | blue;
+                        argb = bit==1?argb|0b1:argb&0b0;
 
-                        image.setRGB(x,y,newArgb);
+                        image.setRGB(x,y,argb);
 
-                        System.out.print(alpha+" ");
-                        System.out.println((image.getRGB(x,y)>>24)&0x00000001);
                     }
                 }
 
